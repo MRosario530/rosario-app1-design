@@ -1,0 +1,107 @@
+@startuml
+
+class Application {
+    'methods
+    +main(String[]) {static}
+    +start(Stage)
+}
+
+class ApplicationController {
+    'attributes
+    -masterList: ToDoListCollection
+    -addItemButton: Button
+    -allListTable: TableView<ToDoList>
+    -titleCol: TableColumn<ToDoList, String>
+    -itemNumCol: TableColumn<ToDoList, Integer>
+    -incompleteItemCol: TableColumn<ToDoList, Integer>
+    -changeTitleButton: Button
+    -completeCheckbox: CheckBox
+    -createListButton: Button
+    -currentListTable: TableView<ToDoList>
+    -descriptionCol: TableColumn<Item, String>
+    -dueDateCol: TableColumn<Item, String>
+    -completionCol: TableColumn<Item, Boolean>
+    -dateEntryBox: DatePicker
+    -deleteItemButton: Button
+    -deleteListButton: Button
+    -descriptionEntryBox: TextArea
+    -displayAllItemsButton: Button
+    -displayCompleteButton: Button
+    -displayIncompleteButton: Button
+    -editItemButton: Button
+    -loadListFromFileButton: Button
+    -saveListToFileButton: Button
+    -titleEntryBox: TextField
+    'methods
+    -onAddItemPressed(ActionEvent)
+    -onChangeCurrentListPressed(ActionEvent)
+    -onCreateListPressed(ActionEvent)
+    -onDeleteItemPressed(ActionEvent)
+    -onDeleteListPressed(ActionEvent)
+    -onDisplayAllPressed(ActionEvent)
+    -onDisplayCompletedPressed(ActionEvent)
+    -onDisplayIncompletedPressed(ActionEvent)
+    -onEditItemPressed(ActionEvent)
+    -onLoadListPressed(ActionEvent)
+    -onSaveListPressed(ActionEvent)
+    +initialize()
+}
+
+class Item {
+    'attributes
+    -description: String
+    -dueDate: String
+    -isComplete: boolean
+    'methods
+    +Item(String, String, boolean):
+    +setComplete(boolean)
+    +isComplete(): boolean
+    +setDescription(String)
+    +getDescription(): String
+    +setDueDate(String)
+    +getDueDate(): String
+    +toString(): String
+}
+
+class ToDoList {
+    'attributes
+    -title: String
+    -thingsToDo: List<Item>
+    -numOfItems: int
+    'methods
+    -ToDoList(String):
+    -setTitle(String)
+    -getTitle(): String
+    -getNumOfItems(): int
+    -getThingsToDo(): List<Item>
+    -addToList(String, String, boolean)
+    -getCompleteThingsToDo(): List<Item>
+    -getIncompleteThingsToDo(): List<Item>
+    -deleteItem(Item)
+    -toString(): String
+}
+
+class ToDoListCollection {
+    'attributes
+    -masterList: List<ToDoList>
+    'methods
+    +ToDoListCollection()
+    +getMasterList(): List<ToDoList>
+    +addList(ToDoList):
+    +addItem(ToDoList, Item):
+    +deleteList(ToDoList):
+    +deleteItem(ToDoList, Item):
+}
+
+class ToDoListFileConverter {
+    'methods
+    +loadListsFromFile(File): List<ToDoList>
+    +saveListsToFileString(List<ToDoList>): String
+}
+
+Application -- ApplicationController
+ApplicationController -- ToDoListCollection
+ApplicationController --o ToDoListFileConverter
+ToDoListCollection -- ToDoList
+ToDoList -- Item
+@enduml

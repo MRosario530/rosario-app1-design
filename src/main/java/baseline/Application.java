@@ -17,10 +17,7 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainMenuScene.fxml")));
-
-        Scene scene = new Scene(root, 600, 400);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles.css")).toExternalForm());
-
+        Scene scene = new Scene(root, 1280, 800);
         stage.setTitle("To Do List Application");
         stage.setScene(scene);
         stage.show();
